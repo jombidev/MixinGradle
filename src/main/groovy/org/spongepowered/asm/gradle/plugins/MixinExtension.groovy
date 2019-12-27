@@ -35,7 +35,6 @@ import org.gradle.api.Task
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.ProjectDependency
-import org.gradle.api.internal.file.collections.SimpleFileCollection
 import org.gradle.api.tasks.SourceSet
 import org.gradle.api.tasks.bundling.AbstractArchiveTask
 import org.gradle.api.tasks.compile.JavaCompile
@@ -238,7 +237,7 @@ public class MixinExtension {
         
         AbstractArchiveTask.metaClass.getRefMaps = {
             if (!delegate.ext.has('refMaps')) {
-                delegate.ext.refMaps = new SimpleFileCollection()
+                delegate.ext.refMaps = project.files()
             }
             delegate.ext.refMaps
         }
@@ -607,7 +606,7 @@ public class MixinExtension {
 
         // Add the refmap to all reobf'd jars
         this.reobfTasks.each { reobfTask ->
-            reobfTask.jar.getRefMaps().files.add(artefactSpecificRefMap)
+            reobfTask.jar.getRefMaps().from(artefactSpecificRefMap)
             reobfTask.jar.from(artefactSpecificRefMap)
         }
 
