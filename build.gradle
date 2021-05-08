@@ -75,3 +75,27 @@ pluginBundle {
 wrapper {
     distributionType = Wrapper.DistributionType.ALL
 }
+
+publishing {
+    repositories {
+        maven {
+            url = "$buildDir/repository"
+        }
+    }
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            pom {
+                name = 'MixinGradle'
+                url = 'https://github.com/xcfrg/MixinGradle'
+
+                developers {
+                    developer {
+                        id = 'mixingradle'
+                        name = 'xcfrg'
+                    }
+                }
+            }
+        }
+    }
+}
