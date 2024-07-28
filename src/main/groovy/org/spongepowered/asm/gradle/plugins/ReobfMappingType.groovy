@@ -29,13 +29,13 @@ package org.spongepowered.asm.gradle.plugins
  * for convenience when working with it via {@link MixinExtension}.
  */
 enum ReobfMappingType {
-    
+
     SEARGE,
     NOTCH;
-    
+
     /**
      * A soft "equals" since we don't import the actual enum
-     * 
+     *
      * @param other Either the forge enum, a string, or an instance of this enum
      * @return true if the string representation of <tt>other</tt> matches our
      *      own

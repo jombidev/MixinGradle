@@ -27,8 +27,6 @@ package org.spongepowered.asm.gradle.plugins
 import org.gradle.api.InvalidUserDataException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.internal.tasks.DefaultSourceSet;
-import org.gradle.api.tasks.SourceSet;
 
 /**
  * This is effectively just the entry point for the MixinGradle plugin, most of
@@ -38,28 +36,29 @@ import org.gradle.api.tasks.SourceSet;
  * add the mixin extension to the project.
  */
 public class MixinGradlePlugin implements Plugin<Project> {
-    
+
     /* (non-Groovydoc)
      * @see org.gradle.api.Plugin#apply(java.lang.Object)
      */
+
     @Override
     void apply(Project project) {
         // This will throw an exception if any criteria are not met
         this.checkEnvironment(project)
-        
+
         // create the mixin extension
         project.extensions.create('mixin', MixinExtension.class, project)
     }
-    
+
     /**
      * Perform some basic validation on the project environment, mainly checking
      * that the tasks and extensions we need (provided by ForgeGradle) are
      * available.
-     * 
+     *
      * @param project Project to validate
      */
-    private void checkEnvironment(Project project) {
-        if (!project.tasks.findByName('genSrgs')) {
+    private static void checkEnvironment(Project project) {
+        if (!project.tasks.named('genSrgs').present) {
             throw new InvalidUserDataException("Could not find task 'genSrgs' on $project, ensure ForgeGradle is applied.")
         }
 
@@ -67,5 +66,5 @@ public class MixinGradlePlugin implements Plugin<Project> {
             throw new InvalidUserDataException("Could not find property 'reobf' on $project, ensure ForgeGradle is applied.")
         }
     }
-    
+
 }

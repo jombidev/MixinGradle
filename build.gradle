@@ -28,7 +28,7 @@ configurations {
 
 dependencies {
     implementation gradleApi()
-    implementation 'com.google.guava:guava:17.0'
+    implementation 'com.google.guava:guava:33.2.1-jre'
     implementation 'org.ow2.asm:asm-debug-all:5.0.3'
 }
 
@@ -54,7 +54,8 @@ jar {
     duplicatesStrategy DuplicatesStrategy.EXCLUDE
 }
 
-task groovydocJar(type: Jar, dependsOn: groovydoc) {
+tasks.register('groovydocJar', Jar) {
+    dependsOn groovydoc
     from groovydoc.destinationDir
     archiveClassifier.set("groovydoc")
 }
@@ -79,7 +80,7 @@ wrapper {
 publishing {
     repositories {
         maven {
-            url = "$buildDir/repository"
+            url = "${getLayout().getBuildDirectory().getAsFile().get()}/repository"
         }
     }
     publications {
