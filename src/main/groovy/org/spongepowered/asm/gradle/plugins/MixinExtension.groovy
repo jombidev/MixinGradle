@@ -210,7 +210,7 @@ class MixinExtension {
             }
 
             // Search for upstream projects and add our jars to their target set
-            project.configurations.compile.allDependencies.withType(ProjectDependency).configureEach { upstream ->
+            project.configurations.compileClasspath.allDependencies.withType(ProjectDependency).configureEach { upstream ->
                 def mixinExt = upstream.dependencyProject.extensions.findByName("mixin")
                 if (mixinExt) {
                     project.reobf.each { reobfTaskWrapper ->
