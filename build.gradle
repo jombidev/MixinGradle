@@ -29,7 +29,7 @@ configurations {
 dependencies {
     implementation gradleApi()
     implementation 'com.google.guava:guava:33.2.1-jre'
-    implementation 'org.ow2.asm:asm-debug-all:5.0.3'
+    implementation 'org.ow2.asm:asm-debug-all:5.2'
 }
 
 artifacts {
@@ -61,8 +61,8 @@ tasks.register('groovydocJar', Jar) {
 }
 
 pluginBundle {
-    website = 'https://github.com/xcfrg/MixinGradle'
-    vcsUrl = 'https://github.com/xcfrg/MixinGradle'
+    website = 'https://github.com/jombidev/MixinGradle'
+    vcsUrl = 'https://github.com/jombidev/MixinGradle'
     description = 'Gradle plugin for SpongePowered Mixin'
     tags = ['spongepowered', 'sponge', 'mixin']
     plugins {
@@ -88,7 +88,7 @@ publishing {
             from components.java
             pom {
                 name = 'MixinGradle'
-                url = 'https://github.com/xcfrg/MixinGradle'
+                url = 'https://github.com/jombidev/MixinGradle'
 
                 developers {
                     developer {

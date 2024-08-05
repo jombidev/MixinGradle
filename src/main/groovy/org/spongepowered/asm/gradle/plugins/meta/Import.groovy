@@ -87,7 +87,7 @@ class Import {
         this.targets.clear()
 
         new ZipInputStream(this.file.newInputStream()).withStream { zin ->
-            for (ZipEntry entry = null; (entry = zin.nextEntry) != null;) {
+            for (ZipEntry entry; (entry = zin.nextEntry) != null;) {
                 if (entry.directory || !entry.name.endsWith('.class')) {
                     continue
                 }
@@ -143,7 +143,7 @@ class Import {
 
         @Override
         AnnotationVisitor visitAnnotation(String desc, boolean visible) {
-            if ("Lorg/spongepowered/asm/mixin/Mixin;".equals(desc)) {
+            if ("Lorg/spongepowered/asm/mixin/Mixin;" == desc) {
                 return this.mixin = new AnnotationNode(desc)
             }
             super.visitAnnotation(desc, visible)
@@ -155,8 +155,8 @@ class Import {
             }
 
             List<String> targets = []
-            List<Type> publicTargets = this.getAnnotationValue("value");
-            List<String> privateTargets = this.getAnnotationValue("targets");
+            List<Type> publicTargets = this.getAnnotationValue("value")
+            List<String> privateTargets = this.getAnnotationValue("targets")
 
             if (publicTargets != null) {
                 for (Type type : publicTargets) {
@@ -186,7 +186,7 @@ class Import {
                 if (getNextValue) {
                     return (T) value
                 }
-                if (value.equals(key)) {
+                if (value == key) {
                     getNextValue = true
                 }
             }
